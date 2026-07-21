@@ -48,13 +48,15 @@ not a log. `Learnings` is append-only, one line per run.
 
 ```
 score = (impact * confidence * priority) / effort
+score = score * 1.5 if status == in-progress else score
 ```
 
 Computed fresh each run from the frontmatter above — nothing is
 pre-computed or cached. An item is eligible only if every id in
 `depends_on` is `status: done`. The routine (per `POLICY.md`) works the
 single highest-scoring eligible item to a good stopping point rather than
-spreading effort across many.
+spreading effort across many. The 1.5x bonus for `in-progress` items is a
+deliberate finish-over-novelty bias — see `POLICY.md` for why.
 
 ## Completed work
 

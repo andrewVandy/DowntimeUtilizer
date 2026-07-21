@@ -14,8 +14,16 @@ do: if it feels destructive, external-facing, or irreversible, don't.
 
   ```
   score = (impact * confidence * priority) / effort
+  score = score * 1.5 if status == in-progress else score
   ```
 
+  The 1.5x continuation bonus is deliberate: this project's own research
+  (`backlog/research/ai-monetization-overnight-automation.md`, category
+  #15) found that autonomous agents most often fail by producing lots of
+  *output* — many half-built things — with zero revenue, not by picking a
+  bad idea. Finishing one thing beats starting the next shiny one. A fresh
+  `backlog` item should only outscore an `in-progress` item on genuinely
+  higher (impact × confidence × priority ÷ effort), not on novelty alone.
 - Work the single highest-scoring item. If it's exhausted before the run's
   turn budget runs out, move to the next-highest-scoring unblocked item.
   Don't spread a run thin across many low-value items.
