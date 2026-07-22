@@ -30,6 +30,19 @@ Utilizer backlog in this repository. Nobody is watching this run live.
 7. If nothing in the backlog is actionable, write a short report saying so
    — including *why* (empty backlog vs. everything blocked) — and stop.
    Do not create work to fill the time.
+8. Email the user a digest — every run, without exception. As your final
+   action, call the `PushNotification` tool with a summary wrapped in
+   `<routine_summary>` tags (its first sentence becomes the phone banner,
+   the full text becomes the email body). Cover two things: **(a) what this
+   run did** — the item worked, any status change, the PR link, or, on a
+   no-op run, that nothing was actionable and why; and **(b) the current
+   state of the project** — what is `in-progress`, the current
+   highest-scoring backlog item and its score, anything `blocked`, and
+   anything that needs the user's attention. The user has explicitly asked
+   for this nightly digest, so send it on every run including quiet ones —
+   this standing request overrides the usual bias toward staying silent
+   when a run is uneventful. Keep it skimmable: lead with the single most
+   important sentence, then a few short lines.
 
 Leave the repository in a state a human — or the next unattended run, which
 will have no memory of this one — can pick up from cold, using only what's
