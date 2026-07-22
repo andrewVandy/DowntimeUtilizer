@@ -86,6 +86,15 @@ yet.
 4. Once packaged and ready: stop and hand off to the user for the
    manual step (create Gumroad seller account, upload, set price,
    publish) — do not attempt this step autonomously.
+5. **Gap flagged by a later research pass** (`ai-monetization-overnight-automation`,
+   category #15): this file has no distribution plan, only a build-and-list
+   plan — that research explicitly warns this is the exact failure mode
+   ("built 7 products, wrote 150+ posts, $0 revenue") to avoid. Before or
+   alongside step 3, draft how the listing will actually reach buyers
+   (e.g. a build-in-public post about this project itself as the hook,
+   posting in relevant Claude Code communities/`awesome-claude-code`-
+   adjacent spaces) rather than treating "upload and publish" as sufficient
+   on its own.
 
 ### Learnings
 (none yet)
