@@ -8,7 +8,7 @@ priority: 5
 effort: 5
 depends_on: []
 created: 2026-07-21
-updated: 2026-07-21
+updated: 2026-07-22
 ---
 
 ## Objective
@@ -50,42 +50,66 @@ this file's id.
 ## Checkpoint
 
 ### Latest state
-First research pass complete: 16 categories, several dozen distinct
-monetization patterns catalogued in `## Findings`, each with sourced
-figures/links and explicit risk notes. Judged reasonably broad on general
-web/HN/Indie Hackers coverage, but explicitly NOT exhaustive on Reddit
-(see Learnings) or on solo-operator-scale lead-gen income data (#8) — left
-`in-progress` rather than `done` for a future pass to pick up, not
-`blocked` (nothing here depends on another item).
+Second research pass complete (2026-07-22). Closed both gaps flagged by
+pass 1: solo-operator lead-gen income data (category #8) and a dedicated
+X/Twitter pass — see Findings pass 2 below. Also confirmed Reddit direct
+mining is not just a search-indexing gap but a hard tool-level block in
+this environment (see Learnings) — downgrading that from "next step" to
+"known permanent limitation, work around it." Mined the file for concrete
+ideas per next-step 3: created two new `backlog/business/` items
+(`github-to-claude-code-launcher-extension`,
+`ai-coding-freelance-portfolio-kit`) rather than forcing 3-5 — judged two
+well-differentiated, source-backed ideas better than padding to a target
+count with weaker ones. Also flagged a distribution-plan gap in the
+existing `gumroad-venture-factory-template` item (see its own Next steps)
+since category #15's core lesson is "build a distribution plan alongside
+the build plan, not after." Left `in-progress`, not `done` — breadth-first
+mandate means this can always widen further, and category #10
+(trading/financial) and #16 (Discord) remain thin.
 
 ### Next steps
-1. Mine Reddit directly (fetch subreddit/search URLs or use Reddit's own
-   search) rather than web-searching for it — see Learnings.
-2. Find solo-operator (not agency-scale) income data for AI lead-gen/cold
-   outreach (category #8) — this pass only found agency positioning, no
-   real numbers.
-3. Once this file is judged sufficiently exhaustive, mine it for 3-5
-   concrete `backlog/business/id.md` candidate ideas, each scored per
-   `POLICY.md`, favoring category #1/#3/#4/#5/#14 (verifiable income) over
-   #10 (trading — mostly vendor marketing, see Findings) and explicitly
-   planning for the "output but zero revenue" failure mode documented in
-   category #15.
-4. Consider a specific search pass on X/Twitter using X's own search
-   rather than general web search, since this pass's web searches for
-   Twitter content mostly surfaced third-party summaries, not primary
-   threads.
+1. Reddit is now confirmed inaccessible to this tool environment (WebFetch
+   refuses reddit.com/old.reddit.com; Pushshift API returns 403) — stop
+   attempting direct fetches. Future passes needing Reddit-flavored signal
+   should rely on secondary aggregator/roundup coverage (as this file
+   already does) or note the gap explicitly rather than re-attempting the
+   same blocked approach.
+2. A new SEO-content-farm cluster sprang up this pass around "OpenClaw"
+   (a self-hosted open-source AI agent with a skill marketplace, ClawHub)
+   — dozens of near-identical "how to make money with OpenClaw" blog posts
+   from unrelated-looking domains (superframeworks, medium/@0xmega,
+   a1republic, topsaasworld, openclawway, openclawlaunch, growwstacks) all
+   citing the same handful of figures. Treat this whole cluster with the
+   same skepticism as the KDP/trading-bot marketing content already
+   flagged — a future pass should verify the OpenClaw GitHub repo/ClawHub
+   listing counts directly before citing any number from this cluster as
+   fact, not just cross-reference within the cluster itself.
+3. Categories #10 (trading) and #16 (Discord) are still thin (agency/
+   vendor marketing only, no solo-operator numbers) — lowest priority gap
+   given both are already flagged low-confidence in Cross-cutting takeaway
+   #2, but a future pass could still try.
+4. If either new `backlog/business/` item spawned this pass gets picked up
+   and completed, come back and note the outcome here — this file is the
+   feedback loop for whether the ROI-scoring judgment calls made this pass
+   were right.
 
 ### Learnings
-`site:reddit.com` queries returned "No links found" for almost every
-query this pass — this search tool does not index Reddit well via the
-`site:` operator. Reddit-attributed data points in Findings came in
-secondhand through HN/Medium/blog citations of Reddit threads, not direct
-reads. Broad phrasing without `site:` (e.g. "reddit r/juststart AI niche
-site income") worked better than exact `site:reddit.com` operators, but
-still mostly surfaced blog/Substack roundups rather than raw threads.
-Highest-signal sources this pass: Indie Hackers post URLs (direct,
-verifiable revenue milestones), Hacker News "Ask HN" threads (candid,
-including failures), and Medium first-person experiment write-ups.
+Confirmed this pass: Reddit isn't just poorly indexed by `site:` search —
+the WebFetch tool itself refuses `reddit.com` and `old.reddit.com`
+outright ("Claude Code is unable to fetch from..."), and the Pushshift
+mirror API (`api.pushshift.io`) returns HTTP 403. This is a firm
+environment-level wall, not something a smarter query will route around;
+stop budgeting future-pass effort on "try Reddit again." X/Twitter,
+by contrast, worked well this pass via plain `WebSearch` (no `site:`
+needed) — got real thread content and specific case studies (see
+Findings), though several were self-reported/DM-verified rather than
+independently confirmed, so flagged accordingly rather than taken at face
+value. General pattern reinforced again: any new tool/platform that
+suddenly has a wave of near-identical "how to make money with X" blog
+posts across unrelated-looking domains (this pass: OpenClaw) is a signal
+to lower confidence on cited figures, not raise it — the volume of
+content is itself weak evidence of a gold-rush/content-farm dynamic, not
+of the underlying opportunity's size.
 
 ## Findings
 
@@ -223,3 +247,86 @@ The single most relevant category to this project's actual thesis, because it's 
 2. **The riskiest / most marketing-driven claims**: trading bots and most "passive income" framing generally (#10). Score low on `confidence` regardless of headline numbers until independently verified.
 3. **The most directly relevant precedent** is category #15 — actual attempts at unattended agent-driven income, including real failures. Any concrete `backlog/business/` idea spawned from this file should explicitly address the "produced output but zero revenue" failure mode (build a distribution/traffic plan alongside the build plan, not after).
 4. **Regulatory/platform risk is increasing, not decreasing**: KDP's AI-disclosure crackdown (#11) is a specific, dated example — check current platform policy before scoring any content-at-scale idea, don't assume 2025-era rules still hold.
+
+## Findings — pass 2 (2026-07-22)
+
+~10 web searches, targeted at pass 1's two explicit gaps (category #8
+solo-operator data, dedicated X/Twitter pass). Reddit direct-fetch attempts
+(3 different approaches) all failed — see Learnings, not included as
+findings since no content was actually retrieved.
+
+### 8 (update). Lead Generation / Cold Outreach — solo-operator numbers found
+
+Pass 1 only found agency-scale positioning; this pass found solo-operator
+figures directly:
+
+- Solo cold-email/lead-gen operators typically earn **$5,000–$15,000/month
+  with 3–5 clients on retainer**; a 5-client agency at $2,500–$3,500/month
+  per client is described as a realistic 6-month target
+  (~$12,500–$17,500/month revenue). ([smartlead.ai](https://www.smartlead.ai/blog/lead-generation-business))
+- Pricing structures: retainer $2,000–$6,000/month per client; per-meeting
+  $200–$500/qualified meeting ($275 average in B2B SaaS per a cited 2026
+  Leadium survey); per-verified-lead $50–$150. ([litemail.ai](https://litemail.ai/blog/cold-email-agency-pricing-guide-2026), [coldiq.com](https://coldiq.com/blog/best-cold-email-agencies))
+- A cited 2025 Clutch survey claims average agency profitability within 3
+  months when cold email is the primary channel — low overhead, so this
+  scores reasonably on effort-to-first-dollar, but note all these figures
+  are vendor/tool-blog sourced (litemail, smartlead, coldiq are themselves
+  cold-email tool vendors), same "marketing content" caveat as category
+  #10 — no independent third-party verification found.
+- Net: closes the gap, but confidence should stay moderate, not high — this
+  is vendor-adjacent content, not Indie-Hackers-style self-reported
+  builder data.
+
+### 17. AI Agent Skill/Plugin Marketplaces (OpenClaw / ClawHub) — new category
+
+Surfaced this pass, not covered in pass 1. **OpenClaw** is a real,
+self-hosted open-source AI agent framework (model-agnostic — works with
+Claude, GPT, Gemini, local models) with a public skill marketplace,
+**ClawHub**, described variously as having 700-17,000+ skills depending on
+source (figures disagree — treat as unverified, see Learnings).
+
+- Individual skill sellers reportedly earn **$100–$1,000/month per skill**,
+  with a realistic starter portfolio (3 skills, ~$20 average) generating
+  ~$600/month; top single-skill sellers cited over $1,000/month.
+  ([Medium/@0xmega](https://medium.com/@0xmega/the-clawhub-skill-economy-how-builders-are-making-600-20-000-month-selling-ai-agents-0b56d4aede5e))
+- Most-cited success story: "Felix"/Claw Mart, reportedly $71,300 in
+  cumulative earnings — an outlier, not a typical result, per the same
+  source that reports it.
+- One thread claim (Ihtesham Ali, X, self-reported/DM-verified rather than
+  independently confirmed): a Berlin-based seller made $127,000 from
+  custom OpenClaw skills; a Texas solo developer cleared $43,000/month
+  from web-scraping automations; a Toronto-based operator built an
+  email-copywriting agent generating $8,200/month. Treat these as
+  directional anecdotes, not verified figures — same skepticism tier as
+  category #10's trading claims.
+- **Why flagged as lower-confidence category overall**: a wave of
+  near-identical "how to make money with OpenClaw" SEO posts appeared
+  across many differently-branded domains this pass, all citing
+  overlapping figures — a classic content-farm/gold-rush signal (see
+  Learnings). Also: this is a different agent runtime/ecosystem than
+  Claude Code, so it doesn't directly reuse this project's own tokens or
+  tooling the way categories #1/#3/#14 do — relevant as market
+  intelligence, lower priority as a direct backlog fit for this project.
+
+### 15 (update). Autonomous agent income experiments — additional X/Twitter evidence
+
+Dedicated X-native search (plain `WebSearch`, no `site:` operator) worked
+well and surfaced primary-ish threads pass 1's general web search missed:
+
+- "10 People Made $847,000 Last Month Using AI Agents" (Ihtesham Ali,
+  X) — claims 3 weeks of sourcing via Discord/Reddit/private communities,
+  "verified through Discord DMs, payment screenshots, and analytics
+  dashboards." That verification standard is self-reported, not
+  independent — same tier as the marketing-adjacent claims elsewhere in
+  this file, include as anecdote not fact. Contains the individual case
+  studies cited under category #17 above.
+- Freelance-platform-specific figures found: entry-level AI-agent-building
+  setups $1,500–$3,000 + $500–$2,500/month retainers; high-ticket
+  full-service packages $8,000–$20,000 upfront; a freelancer with 5
+  retainer clients earning $500–$2,500/month passively on top of new
+  project fees. Consistent with, and slightly more conservative than, the
+  Upwork figures already in category #3. ([emergent.sh](https://emergent.sh/learn/how-to-make-money-with-ai))
+- Reinforces, doesn't change, category #15's core takeaway: real money
+  exists, but every credible figure sits next to at least one explicitly
+  unverified or self-reported one in the same source — the pattern (mix
+  wins with failures, distrust round numbers) holds.
