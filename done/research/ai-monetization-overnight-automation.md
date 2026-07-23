@@ -1,14 +1,14 @@
 ---
 id: ai-monetization-overnight-automation
 category: research
-status: in-progress
+status: done
 impact: 5
 confidence: 4
 priority: 5
 effort: 5
 depends_on: []
 created: 2026-07-21
-updated: 2026-07-21
+updated: 2026-07-23
 ---
 
 ## Objective
@@ -50,42 +50,46 @@ this file's id.
 ## Checkpoint
 
 ### Latest state
-First research pass complete: 16 categories, several dozen distinct
-monetization patterns catalogued in `## Findings`, each with sourced
-figures/links and explicit risk notes. Judged reasonably broad on general
-web/HN/Indie Hackers coverage, but explicitly NOT exhaustive on Reddit
-(see Learnings) or on solo-operator-scale lead-gen income data (#8) — left
-`in-progress` rather than `done` for a future pass to pick up, not
-`blocked` (nothing here depends on another item).
+Second research pass complete and this item is now `done`. Closed all
+four gaps left by the first pass: confirmed Reddit is flatly unreachable
+by this project's tools (not just poorly indexed, see Learnings), found
+real solo-operator lead-gen/SMB-agent income figures (category #8, and a
+new cross-cutting pattern below), ran a direct X/Twitter search pass that
+surfaced genuine primary threads instead of third-party summaries, and
+mined the combined findings into three concrete, differentiated
+`backlog/business/` candidates (see below) — the file's stated purpose
+("seed list future business items get scored and picked from") is now
+fulfilled.
 
 ### Next steps
-1. Mine Reddit directly (fetch subreddit/search URLs or use Reddit's own
-   search) rather than web-searching for it — see Learnings.
-2. Find solo-operator (not agency-scale) income data for AI lead-gen/cold
-   outreach (category #8) — this pass only found agency positioning, no
-   real numbers.
-3. Once this file is judged sufficiently exhaustive, mine it for 3-5
-   concrete `backlog/business/id.md` candidate ideas, each scored per
-   `POLICY.md`, favoring category #1/#3/#4/#5/#14 (verifiable income) over
-   #10 (trading — mostly vendor marketing, see Findings) and explicitly
-   planning for the "output but zero revenue" failure mode documented in
-   category #15.
-4. Consider a specific search pass on X/Twitter using X's own search
-   rather than general web search, since this pass's web searches for
-   Twitter content mostly surfaced third-party summaries, not primary
-   threads.
+This item is done; no further passes planned. If a future run wants to
+widen this further (e.g. a dedicated pass on category #6 e-commerce
+automation, or re-checking category #11's KDP/platform-policy risk for
+drift), reopen a new dated research item rather than resurrecting this
+one — it has already served its purpose of seeding
+`backlog/business/chrome-extension-ai-wrapper.md`,
+`backlog/business/smb-ai-agent-template-kit.md`, and
+`backlog/business/ship-one-paid-tool-flip.md`.
 
 ### Learnings
-`site:reddit.com` queries returned "No links found" for almost every
-query this pass — this search tool does not index Reddit well via the
-`site:` operator. Reddit-attributed data points in Findings came in
-secondhand through HN/Medium/blog citations of Reddit threads, not direct
-reads. Broad phrasing without `site:` (e.g. "reddit r/juststart AI niche
-site income") worked better than exact `site:reddit.com` operators, but
-still mostly surfaced blog/Substack roundups rather than raw threads.
-Highest-signal sources this pass: Indie Hackers post URLs (direct,
-verifiable revenue milestones), Hacker News "Ask HN" threads (candid,
-including failures), and Medium first-person experiment write-ups.
+Pass 1: `site:reddit.com` queries returned "No links found" for almost
+every query — this search tool does not index Reddit well via the `site:`
+operator. Pass 2 (this run): confirmed this is a hard block, not an
+indexing gap — both `WebFetch` on `reddit.com`/`old.reddit.com` (including
+direct `.json` search endpoints) and `WebSearch` with `allowed_domains:
+["reddit.com"]` failed outright, the latter with an explicit "not
+accessible to our user agent" error. Reddit is not minable by this
+project's tools at all, by any method tried so far — stop attempting
+direct Reddit access in future passes; any Reddit-sourced data must keep
+coming in secondhand via HN/Medium/blog citations, same as pass 1. Many
+individual marketing/SEO blog pages (aibusiness.vc, botborne.com,
+growthhacksuite.com, litemail.ai) return HTTP 403 to `WebFetch` even
+though they show up in `WebSearch` results — `WebSearch`'s own result
+summaries were the only usable signal from those domains this pass, not
+a direct fetch. X/Twitter, by contrast, worked well this pass via plain
+`WebSearch` queries mentioning "x.com" / "twitter" in the query text
+(not `allowed_domains`) — this surfaced real individual thread URLs and
+quoted content, a meaningfully better result than pass 1's attempt.
 
 ## Findings
 
@@ -223,3 +227,74 @@ The single most relevant category to this project's actual thesis, because it's 
 2. **The riskiest / most marketing-driven claims**: trading bots and most "passive income" framing generally (#10). Score low on `confidence` regardless of headline numbers until independently verified.
 3. **The most directly relevant precedent** is category #15 — actual attempts at unattended agent-driven income, including real failures. Any concrete `backlog/business/` idea spawned from this file should explicitly address the "produced output but zero revenue" failure mode (build a distribution/traffic plan alongside the build plan, not after).
 4. **Regulatory/platform risk is increasing, not decreasing**: KDP's AI-disclosure crackdown (#11) is a specific, dated example — check current platform policy before scoring any content-at-scale idea, don't assume 2025-era rules still hold.
+
+### Pass 2 addenda, 2026-07-23
+
+Closing the four gaps the first pass left open (Reddit direct access,
+solo-operator lead-gen data, X/Twitter direct search, mining concrete
+business ideas). ~10 additional web searches plus direct X/Twitter
+queries; Reddit access was retried and conclusively fails (see Learnings)
+rather than yielding new data.
+
+**Category #8 (lead-gen/cold outreach), solo-operator data found**:
+- A bootstrapped SaaS founder hit $10k MRR in 90 days using GMass cold
+  email ($20/mo tool cost): 4,500 personalized emails to ICP-matched
+  founders, 127 conversions, cold email driving 73% of acquisition at
+  1/11th the cost-per-acquisition of paid ads. ([growthhacksuite.com](https://growthhacksuite.com/gmass-solopreneur-case-study), via WebSearch summary — direct fetch 403'd)
+- Cold-email-agency pricing structure, solo-operator-scale: retainers
+  $2,500-$10,000/mo per client; a $20k/mo agency runs 6-8 clients at
+  $2,500-3,500 each; a $50k/mo tier runs 12-30 clients depending on
+  premium vs. volume pricing. Per-meeting/pay-per-lead pricing ($50-200 per
+  booked meeting) lets a solo operator running 3 clients at ~50 meetings/mo
+  gross $7,500-$30,000/mo with no sales reps. ([litemail.ai](https://litemail.ai/blog/cold-email-agency-revenue-model-50k-month), [aiprofitboardroom.com](https://aiprofitboardroom.com/blog/how-to-make-money-building-ai-agents/) — WebSearch summaries, direct fetch 403'd on both)
+- These are agency/tool-cost figures, not independently-audited personal
+  income — same "vendor/marketing-adjacent" caveat as category #10,
+  though more concrete than the pure-marketing trading-bot claims.
+
+**New cross-cutting pattern, evidenced independently by both web search
+and direct X/Twitter search this pass — narrower and better-evidenced than
+the general "AI agency" framing in category #2**: build one narrow,
+single-purpose AI agent (not a general assistant) and sell it directly to
+small/local businesses, either as a flat $2,000-$5,000 build fee or a
+$500-$2,000/mo retainer, with a solo operator managing ~10 SMB clients on
+templated workflows grossing $5,000-$20,000/mo.
+- Real, primary X/Twitter threads found (not third-party summaries):
+  **Corey Ganim** (`@GanimCorey`/`@coreyganim`) runs a recurring series on
+  building narrow agents "in 2 hours" and selling them for $2,000-$5,000
+  each — e.g. "10 More AI Agents You Can Sell for $2,000-$5,000/Month".
+  **Kanika** (`@KanikaBK`) documented a specific solo operator in
+  Shenzhen who built 7 AI agents inside Claude Code over 4 weeks and had
+  12 clients paying $400/mo each by the end of month one, largely
+  hands-off on execution. ([Corey Ganim](https://x.com/GanimCorey/status/2023066652858847590), [Kanika](https://x.com/KanikaBK/status/2058836176367464844))
+- Web sources independently corroborate the same shape: AI-agent workflows
+  for local SMBs packaged into $500/$1,000/$2,000 monthly tiers; a solo
+  operator managing ten SMB clients on templated workflows earning
+  $5,000-$20,000/mo. ([digitalapplied.com](https://www.digitalapplied.com/blog/ai-agent-workflows-smb-revenue-streams-guide) — WebSearch summary, direct fetch 403'd)
+- **Caution**: X is also full of pure hype in this exact niche — e.g. a
+  viral-format post claiming "10 People Made $847,000 Last Month Using AI
+  Agents" is a clickbait-shaped headline with no independent verification,
+  same treatment as the trading-bot marketing claims in category #10.
+  Two of the same thread's *specific* sub-claims (a developer clearing
+  $43,000/mo selling web-scraping automations; a former marketing manager
+  building an $8,200/mo email-copywriting agent) are more concrete but
+  still single-source and unverified — weight them accordingly.
+- **Why this matters for scoring `backlog/business/` items**: this
+  pattern is real and repeatedly evidenced, but the direct "sell to SMBs"
+  version requires a human doing outbound sales/cold contact to real
+  businesses — outside what this project's unattended routine should do
+  per `POLICY.md` unless that were a deliberately scoped, explicit
+  objective. The business items spun from this research (see Checkpoint)
+  reframe the same validated demand into forms the routine itself can
+  fully build: a self-serve Gumroad template kit
+  (`smb-ai-agent-template-kit`) where the *buyer* does the client
+  acquisition, and a Chrome-extension wrapper
+  (`chrome-extension-ai-wrapper`) that gets free store-search distribution
+  instead of needing outbound sales at all.
+
+**X/Twitter direct search, general observation**: plain `WebSearch` calls
+whose query text mentioned "x.com"/"twitter" (rather than using
+`allowed_domains`, which Reddit's block ruled out as a pattern) reliably
+surfaced individual, dated tweet/thread URLs with quoted content — a real
+improvement over pass 1, which only found third-party writeups
+*referencing* Twitter/X content. Recommend this phrasing approach for any
+future X-focused research pass in this repo.
