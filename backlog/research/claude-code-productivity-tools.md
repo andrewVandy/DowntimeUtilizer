@@ -8,7 +8,7 @@ priority: 4
 effort: 4
 depends_on: []
 created: 2026-07-21
-updated: 2026-07-21
+updated: 2026-07-26
 ---
 
 **Correction to this file's first-pass claim, checked against official
@@ -29,6 +29,21 @@ still holds. `ccusage`'s "official-limit trust layer" (Findings #1) reading
 `rate_limits` via `--statusline` is a real, separate mechanism worth a
 narrow follow-up look, but is a local-machine statusline integration, not
 something available inside a Routine's stateless cloud sandbox either.
+
+**Second correction, pass 2 (2026-07-26), checked by fetching both READMEs
+directly**: the "official-limit trust layer" described above was
+misattributed to **ccusage** in pass 1. That feature does not exist in
+ccusage — its actual `statusline` command is a plain "compact usage
+display for status bar hooks (Beta)" with no rate-limit provenance system.
+The trust-layer feature (rate_limits capture with `official` /
+`local_estimate` / `experimental` / `unknown` provenance labels) belongs to
+**Claude-Code-Usage-Monitor** (Maciek-roboblog) instead — confirmed by
+fetching `raw.githubusercontent.com/.../README.md` for both projects
+directly rather than trusting search snippets. Findings #1 below is
+corrected accordingly. Doesn't change this project's own conclusion either
+way (a local statusline still isn't reachable by a stateless Cloud
+Routine), but anyone acting on pass 1's ccusage recommendation for this
+specific feature would have been pointed at the wrong tool.
 
 ## Objective
 
@@ -70,45 +85,96 @@ original design research).
 ## Checkpoint
 
 ### Latest state
-First research pass complete: all four user-mentioned tools verified real
-(see Findings #0), 10 categories catalogued with 50+ distinct tools, each
-with a source link and an honest activity/legitimacy signal. First pass
-also surfaced a claim about `/cost` gaining rate-limit data — checked
-against official docs during review before commit and **not
-corroborated** (see the corrected note above the frontmatter, and
-Findings #1); this project's own "no programmatic remaining-quota API"
-conclusion is unchanged. Left `in-progress`, not `done` — see gaps below.
+Second research pass complete (2026-07-26). Closed all four of pass 1's
+concrete next steps by querying the GitHub API directly (via the `github`
+MCP tool's `search_repositories`, `repo:owner/name` exact match) instead of
+search snippets or aggregator sites:
+
+1. **Headroom naming collision resolved — it's five repos, not four.**
+   Pass 1 missed a fifth: **headroomlabs-ai/headroom** (62,471★, a
+   token-compression library/proxy/MCP server — same category as
+   `gglucass/headroom-desktop`, not a usage monitor). This is what
+   `skillsllm.com`'s "headroom (60.4k★)" figure was actually referring to
+   — the number is real, it just belonged to a repo pass 1 hadn't found
+   yet, not to any of the four already-catalogued "headroom" projects
+   (whose real star counts, GitHub-verified, are 11 / 9 / 68 / 484 — see
+   Findings #0, updated).
+2. **Star counts verified via GitHub API, not aggregator scraping.**
+   `graphify`: 96,017★ (skillsllm's 76.3k was actually an *undercount*, not
+   inflated). `ponytail`: 89,475★. `codeburn`: 8,934★. `ccburn`: 94★.
+   `ccusage`: 17,465★. `awesome-claude-code`: 50,953★. See Findings — pass 2
+   for the full table with repo-age context.
+3. **Partial X/Twitter practitioner-sentiment pass.** `ponytail` confirmed
+   as genuine organic virality (June 2026), not marketing-farm content —
+   found independent, differently-worded threads in English, Portuguese,
+   and Spanish all describing the same real experience (agent over-codes,
+   this fixes it), a pattern consistent with real word-of-mouth rather than
+   the OpenClaw-style near-identical-post content-farm signal flagged in
+   the sibling monetization file. Reddit remains blocked (confirmed
+   permanent per pass 1 — not re-attempted).
+4. **ccusage statusline claim re-checked and corrected, not just
+   confirmed.** Fetching both projects' READMEs directly turned up a real
+   pass-1 error: the "official-limit trust layer" belongs to
+   **Claude-Code-Usage-Monitor**, not ccusage (see corrected note above the
+   frontmatter, and Findings #1).
+
+Also surfaced a new cluster of usage-monitor tools not caught in pass 1
+(AIQuotaBar and similar — see Findings #1 update) and a notable
+cross-cutting caution: several of this ecosystem's most-cited repos show
+star-accumulation rates far outside normal organic range for a niche dev
+tool (see Learnings). Left `in-progress` — breadth-first mandate, and
+next-steps 3 (IDE/orchestration/dotfiles categories are still thin on
+verification) and the naming-collision gotcha both generalize beyond
+"headroom" and haven't been swept for other collisions yet.
 
 ### Next steps
-1. Resolve the naming collision under "headroom" (four unrelated repos
-   share the name — context-window bar, quota tracker ×2, token-compression
-   proxy) before recommending one to the user; confirm which the user
-   actually meant or wants.
-2. Verify the `skillsllm.com` star counts cited for `graphify` (76.3k★)
-   and `headroom` (60.4k★) against actual GitHub — these numbers looked
-   inflated relative to the tools' apparent maturity/description and were
-   not independently confirmed this pass (see Learnings).
-3. Direct Reddit/X mining for practitioner opinions on which of these
-   tools people actually keep using long-term vs. abandon — this pass
-   found the tools via search-engine/blog coverage, not community
-   sentiment, same indexing gap as the sibling research files.
-4. If ccusage's `--statusline` "official-limit trust layer" (Findings #1)
-   turns out to read genuine official data on closer inspection, evaluate
-   whether that specific mechanism (not `/cost`) offers anything usable
-   for local, human-facing usage visibility — separate from this project's
-   Cloud Routine, which can't reach a local statusline integration anyway.
+1. Sweep categories 2, 3, 4, 6, 8, 9, 10 (session viewers, git helpers,
+   hooks libraries, MCP memory servers, orchestration, IDE integrations,
+   dotfiles) the same way category 0/1/7 just got treated this pass:
+   GitHub-API-verify star counts and check for un-caught naming collisions
+   — this pass only fully re-verified the four user-named tools plus
+   usage-tracking and token-compression.
+2. The star-velocity anomaly (Learnings) deserves its own explicit
+   treatment: pick the 3-4 fastest-growing repos in this file
+   (`graphify`, `ponytail`, `headroomlabs-ai/headroom`) and look for
+   independent signal beyond star count — actual npm/PyPI download
+   numbers, HN/blog discussion volume relative to stars, GitHub's own
+   fake-star detection tools (e.g. `star-history.com`'s anomaly view) —
+   before recommending any of them to the user as "most popular" without
+   that caveat attached.
+3. New tools surfaced but not yet written into a Findings section:
+   AIQuotaBar (yagcioglutoprak), ai-quota (niederme), aqua5230/usage,
+   TokenBar (Nanako0129), claude-monitor (rjwalters) — all usage-monitor
+   variants found via a plain WebSearch this pass, not yet given the same
+   verify-and-catalogue treatment as the rest of category 1.
+4. Direct Reddit/X mining for the *other* three user-named tools
+   (headroom, graphify, codeburn) — this pass only did the X sentiment
+   check for ponytail.
 
 ### Learnings
-Same Reddit/`site:` indexing gap as the sibling files. New pattern this
-pass: several tool names collide across unrelated GitHub repos (four
-"headroom" projects, two active "graphify" repos, a "codeburn" plus a
-near-identical unrelated "ccburn") — searching the exact name alone isn't
-enough to identify "the" tool a user means; always disambiguate by
-description before recommending. Aggregator sites like skillsllm.com
-surfaced repeatedly across searches but their star-count figures didn't
-consistently line up with tool maturity — treat as a leads source, not a
-verified-facts source, and cross-check notable claims against the actual
-GitHub repo.
+Same Reddit/`site:` indexing gap as the sibling files, still holds — not
+re-attempted this pass since pass 1 already confirmed it's a hard tool-level
+block. New pattern this pass: **star-count velocity as its own skepticism
+signal**, same family as the OpenClaw content-farm signal in the sibling
+monetization file but for a different mechanism (bought/bot stars vs. SEO
+content farms). `graphify` (created 2026-04-03) hit 96k stars in ~16
+weeks — roughly 6,000 stars/week sustained. `ponytail` (created
+2026-06-12) hit 89k stars in ~6.5 weeks — roughly 13,700 stars/week.
+`headroomlabs-ai/headroom` (created 2026-01-07) hit 62k in ~29 weeks —
+roughly 2,150 stars/week. For comparison, `awesome-claude-code` — a much
+more established, community-visible project — averaged roughly 780
+stars/week over its full 65-week history to reach 51k, and `ccusage`
+(60 weeks old) averaged roughly 290/week to reach 17.5k. Sustained rates
+in the multiple-thousands-per-week range for brand-new single-purpose dev
+tools are not impossible (genuine viral moments happen) but are far
+outside what the more organically-adopted comparison repos show — treat
+as a "verify independently before citing as evidence of real-world
+adoption" flag on those three specific repos, the same way OpenClaw's
+content-farm cluster got flagged, not as proof of fraud. Confirmed again
+this pass: aggregator sites (`skillsllm.com`) can cite a real, verifiable
+number for a repo that simply wasn't in the catalogue yet — the fix for a
+"suspicious" aggregator figure is to search harder for the repo it's
+describing, not just to discount the number.
 
 ## Findings
 
@@ -117,23 +183,34 @@ awesome-lists, and general web. Every entry has a source link.
 
 ### 0. The four user-mentioned names — all real, resolved
 
-- **"headroom" is a naming collision, not one project** — four distinct,
-  unrelated repos share the name: **patwalls/headroom** and
-  **allandecastro/headroom** (both macOS menu-bar Claude Code/Copilot quota
-  trackers — session + weekly %, color-coded), **henchmarketing-rgb/headroom**
-  (a context-window usage bar for the statusline, reads actual session
-  JSONL), and **gglucass/headroom-desktop** (a token-optimization proxy
-  claiming ~2x more usage via compression — same category as #9 below).
-  ([patwalls/headroom](https://github.com/patwalls/headroom), [allandecastro/headroom](https://github.com/allandecastro/headroom), [henchmarketing-rgb/headroom](https://github.com/henchmarketing-rgb/headroom), [gglucass/headroom-desktop](https://github.com/gglucass/headroom-desktop))
+- **"headroom" is a naming collision across five repos, not four** —
+  pass 1 found four; pass 2 found the fifth GitHub-API-verified this pass:
+  **patwalls/headroom** (11★, macOS menu-bar Claude Code usage, session +
+  weekly %), **allandecastro/headroom** (9★, Tauri menu-bar app tracking
+  Claude Code + Copilot quotas), **henchmarketing-rgb/headroom** (68★,
+  context-window usage bar for the statusline, reads actual session JSONL),
+  **gglucass/headroom-desktop** (484★, a token-optimization proxy claiming
+  ~2x more usage via compression — same category as #9 below), and
+  **headroomlabs-ai/headroom** (62,471★ — GitHub-verified, matches the
+  skillsllm.com figure almost exactly; a much larger token-compression
+  library/proxy/MCP server, 20% fewer tokens for coding agents / 60-95%
+  fewer for JSON, same category as gglucass's but a different, far more
+  starred project — missed entirely in pass 1). The skillsllm.com "60.4k★"
+  figure flagged with skepticism in pass 1 turned out to be a real number
+  for a real repo pass 1 simply hadn't found — see Learnings.
+  ([patwalls/headroom](https://github.com/patwalls/headroom), [allandecastro/headroom](https://github.com/allandecastro/headroom), [henchmarketing-rgb/headroom](https://github.com/henchmarketing-rgb/headroom), [gglucass/headroom-desktop](https://github.com/gglucass/headroom-desktop), [headroomlabs-ai/headroom](https://github.com/headroomlabs-ai/headroom))
 - **"graphify"** — real: **Graphify-Labs/graphify**, a `/graphify` skill
   for Claude Code (and Cursor/Codex/Gemini CLI) that turns a codebase —
   code, docs, SQL schemas, configs, PDFs — into a queryable knowledge graph
   via local deterministic AST parsing, no vector store, fully offline for
   code-only corpora. A related community project, `claude-code-memory-setup`,
   pairs it with Obsidian for persistent memory, claiming up to 71.5x fewer
-  tokens per session. Treat the "76.3k★" figure from the skillsllm.com
-  aggregator with skepticism (see Learnings) rather than as a confirmed
-  GitHub star count. ([Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify/tree/v8), [claude-code-memory-setup](https://github.com/lucasrosati/claude-code-memory-setup))
+  tokens per session. **GitHub-verified star count (pass 2): 96,017★** —
+  higher than the skillsllm.com "76.3k★" figure flagged in pass 1, not
+  lower; the aggregator undercounted rather than inflated. The count
+  itself is real, but see Learnings for why the *growth rate* to reach it
+  (created 2026-04-03) is flagged as worth independent verification before
+  treating as proof of organic adoption. ([Graphify-Labs/graphify](https://github.com/Graphify-Labs/graphify/tree/v8), [claude-code-memory-setup](https://github.com/lucasrosati/claude-code-memory-setup))
 - **"codeburn"** — real: **getagentseal/codeburn**, a free local TUI
   dashboard tracking AI-coding token usage/cost across 31+ tools and agents
   (Claude Code, Cursor, Codex, Gemini) by model/project/task, `npx codeburn`
@@ -148,22 +225,44 @@ awesome-lists, and general web. Every entry has a source link.
   (on real Claude Code sessions, 12 feature tasks against a real open-source
   repo) at ~54% less code on average (up to 94%), ~20% cheaper, ~27% faster.
   Went viral enough to get independent DEV/Medium writeups analyzing it.
+  **GitHub-verified star count (pass 2): 89,475★**, created 2026-06-12 —
+  see Learnings for the growth-rate flag. **Pass 2 X/Twitter sentiment
+  check**: found independently-worded organic threads in English,
+  Portuguese, and Spanish all describing the same real pain point (agent
+  over-codes) and the same fix, a pattern consistent with genuine
+  word-of-mouth rather than a coordinated content-farm push — the strongest
+  organic-adoption signal of any tool in this file so far.
   ([DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail))
 
 ### 1. Usage/Cost Tracking & Dashboards
 
-- **ccusage** (ccusage/ccusage, ccusage.com): the incumbent, still very
-  active. 2026 additions include custom pricing overrides, per-project
-  instance filtering, timezone support, a persistent local "usage
-  warehouse" that survives Claude's 30-day log cleanup, and — most notable
-  for this project — an **"official-limit trust layer"**: `--statusline`
-  now captures Claude Code's own official `rate_limits` data directly,
-  with provenance labels (`official` vs `local_estimate` vs `experimental`
-  vs `unknown`) distinguishing verified data from parsed guesses.
-  ([ccusage.com](https://ccusage.com/), [github](https://github.com/ccusage/ccusage))
+- **ccusage** (ccusage/ccusage, ccusage.com, **17,465★ GitHub-verified**):
+  the incumbent, still very active. 2026 additions include custom pricing
+  overrides, per-project instance filtering, timezone support, and a
+  persistent local "usage warehouse" that survives Claude's 30-day log
+  cleanup. Its `statusline` command (beta) is a compact usage display for
+  status-bar hooks — **not** the rate-limit trust layer below; pass 1
+  misattributed that feature to this project (see corrected note above the
+  frontmatter). ([ccusage.com](https://ccusage.com/), [github](https://github.com/ccusage/ccusage))
 - **Claude-Code-Usage-Monitor** (Maciek-roboblog): real-time monitor with
-  burn-rate velocity and predictions for when you'll hit rate limits.
+  burn-rate velocity and predictions for when you'll hit rate limits. Also
+  the actual source of the **"official-limit trust layer"** — `--statusline`
+  captures Claude Code's own official `rate_limits` data directly, with
+  provenance labels (`official` vs `local_estimate` vs `experimental` vs
+  `unknown`) distinguishing verified data from parsed guesses — corrected
+  onto this entry in pass 2 after it was wrongly attributed to ccusage in
+  pass 1 (confirmed by fetching both projects' READMEs directly).
   ([github](https://github.com/Maciek-roboblog/Claude-Code-Usage-Monitor))
+- **AIQuotaBar** (yagcioglutoprak, 20★): macOS menu-bar app showing Claude.ai
+  and ChatGPT usage live, auto-detects sessions from browser cookies (no
+  copy-paste), includes a WidgetKit desktop widget. Surfaced this pass
+  alongside a wider cluster of similar recent entrants not yet individually
+  verified: **ai-quota** (niederme), **aqua5230/usage** (local-only, zero
+  API calls, HTML reports), **TokenBar** (Nanako0129, native Swift,
+  tracks 25+ agents), **claude-monitor** (rjwalters) — same category as the
+  rest of this section, flagged for a future pass to catalogue properly
+  rather than folded in here without individual verification.
+  ([AIQuotaBar](https://github.com/yagcioglutoprak/AIQuotaBar))
 - **claude-usage** (phuryn) and **claude-usage** (ocodista): two unrelated
   local dashboards, both reading Claude Code's local files for token/cost/
   session history; phuryn's adds a Pro/Max progress bar.
@@ -298,6 +397,12 @@ awesome-lists, and general web. Every entry has a source link.
   reduction "on common dev commands" specifically (narrower scope than the
   others). ([github](https://github.com/rtk-ai/rtk))
 - **headroom-desktop** (gglucass) — see #0.
+- **headroom** (headroomlabs-ai, 62,471★ GitHub-verified) — see #0; the
+  fifth, previously-missed "headroom" repo, found pass 2. By far the most
+  starred tool in this category — library/proxy/MCP server, 20% fewer
+  tokens for coding agents, 60-95% fewer for JSON, same input/output
+  answers claimed. See Checkpoint Learnings for the star-velocity caveat
+  before treating that star count as adoption evidence on its own.
 - Caveat: all percentage claims above are the projects' own, none
   independently benchmarked in this pass — treat as directional, not
   verified, the same way trading-bot income claims were flagged in the
@@ -378,3 +483,67 @@ awesome-lists, and general web. Every entry has a source link.
    Claude Code (finout.io, claudelab.net, and similar) should be
    cross-checked against `code.claude.com/docs` before a claim from them is
    treated as fact, same as the `skillsllm.com` star-count skepticism above.
+
+## Findings — pass 2 (2026-07-26)
+
+GitHub API queries (`repo:owner/name` exact match via `search_repositories`)
+for every repo flagged in pass 1's Learnings/Next-steps, plus two direct
+README fetches (`raw.githubusercontent.com`) and three targeted WebSearch
+passes (ccusage statusline, ponytail X sentiment, headroom disambiguation).
+Reddit not re-attempted (confirmed permanent block, pass 1).
+
+### GitHub-verified star counts (vs. pass-1 aggregator/unverified figures)
+
+| Repo | Stars (verified) | Created | Pass-1 figure |
+|---|---|---|---|
+| Graphify-Labs/graphify | 96,017 | 2026-04-03 | "76.3k★" (skillsllm, unverified) |
+| DietrichGebert/ponytail | 89,475 | 2026-06-12 | none cited |
+| headroomlabs-ai/headroom | 62,471 | 2026-01-07 | not found in pass 1 at all |
+| hesreallyhim/awesome-claude-code | 50,953 | 2025-04-19 | none cited |
+| getagentseal/codeburn | 8,934 | 2026-04-13 | none cited |
+| ccusage/ccusage | 17,465 | 2025-05-29 | none cited |
+| gglucass/headroom-desktop | 484 | 2026-03-30 | none cited |
+| henchmarketing-rgb/headroom | 68 | 2026-04-23 | none cited |
+| JuanjoFuchs/ccburn | 94 | 2026-01-09 | none cited |
+| patwalls/headroom | 11 | 2026-06-09 | none cited |
+| allandecastro/headroom | 9 | 2026-05-26 | none cited |
+
+All figures above superseded pass 1's "skillsllm.com star counts looked
+inflated, treat with skepticism" framing for `graphify` specifically — the
+verified number was *higher* than the aggregator's, not lower. The
+`headroom` "60.4k★" figure from pass 1's Learnings turned out to describe
+a real fifth repo (`headroomlabs-ai/headroom`) pass 1 hadn't found, not an
+inflated number for one of the four already-catalogued ones.
+
+### New finding: star-accumulation velocity as a distinct skepticism signal
+
+See Learnings above (Checkpoint section) for the full reasoning — summary:
+`graphify`, `ponytail`, and `headroomlabs-ai/headroom` all show
+thousands-of-stars-per-week sustained growth since creation, several times
+faster than the two much more established comparison repos
+(`awesome-claude-code`, `ccusage`) in this same file. Not proof of
+star-buying/bot-farming, but a "verify independently before citing as
+adoption evidence" flag in the same family as the OpenClaw content-farm
+signal flagged in the sibling `ai-monetization-overnight-automation` file
+— a different mechanism (paid/bot stars vs. SEO volume), same underlying
+lesson: unusually fast, unusually uniform growth in this ecosystem is
+itself a signal worth naming, not just a curiosity.
+
+### New finding: ccusage / Claude-Code-Usage-Monitor feature misattribution
+
+Documented in full in the corrected note above the frontmatter and in
+Findings #1. Caught by fetching both projects' actual README files
+directly rather than relying on search-result snippets, which is worth
+naming as a general lesson for future passes in this file: for any claim
+about *which specific tool* has *which specific feature*, fetch that
+tool's own README/docs before citing it, even when a search snippet reads
+confidently.
+
+### New finding: organic-adoption signal for ponytail via X/Twitter
+
+Documented in Findings #0 (ponytail entry). Independently-worded threads
+in three languages describing the same pain point and the same fix is a
+stronger organic-signal pattern than anything else surfaced in this file
+so far — worth using as the comparison baseline if a future pass wants to
+assess whether `graphify` or `headroomlabs-ai/headroom`'s adoption is
+similarly organic or not (per the velocity flag above).
