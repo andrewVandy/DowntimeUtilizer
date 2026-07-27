@@ -29,6 +29,16 @@ do: if it feels destructive, external-facing, or irreversible, don't.
   Don't spread a run thin across many low-value items.
 - If nothing scores (empty backlog, everything blocked or done), say so in
   the run report and stop. Do not invent busywork to fill the window.
+- Before starting work on the top-scoring item, check for open pull
+  requests against this repo. `main` only reflects merged work — a prior
+  run's PR can already have finished (or gone further on) the very item
+  this run is about to pick, while still sitting unmerged. If an open PR
+  already covers the item to a further-along or better-verified state,
+  don't duplicate it: pick the next-highest-scoring genuinely-unclaimed
+  item instead, and flag the overlap in the run report so a human can
+  reconcile the open PRs. (Added 2026-07-25 after a run's first attempt
+  duplicated, less accurately, work already sitting in an unmerged PR —
+  see that day's report.)
 
 ## Hard limits
 
